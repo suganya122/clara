@@ -7,9 +7,9 @@ on:
 
 jobs:
   build-and-test:
-    # macos-26 stayed queued for 10+ minutes on a free repo, so use macos-latest.
+    # arm64 macOS runners were not available (capacity), so use the Intel pool.
     # Switch back to a macOS 26 runner at Milestone 7 (SpeechAnalyzer needs the 26 SDK).
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
