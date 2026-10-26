@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    # macOS 26 runner: needed for the macOS 26 SDK (SpeechAnalyzer, Milestone 7).
+    # If this label is ever unavailable, fall back to macos-latest.
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          sw_vers
+          swift --version
+      - name: Build
+        run: swift build
+      - name: Test
+        run: swift test
