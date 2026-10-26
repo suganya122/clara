@@ -7,9 +7,9 @@ on:
 
 jobs:
   build-and-test:
-    # macOS 26 runner: needed for the macOS 26 SDK (SpeechAnalyzer, Milestone 7).
-    # If this label is ever unavailable, fall back to macos-latest.
-    runs-on: macos-26
+    # macos-26 stayed queued for 10+ minutes on a free repo, so use macos-latest.
+    # Switch back to a macOS 26 runner at Milestone 7 (SpeechAnalyzer needs the 26 SDK).
+    runs-on: macos-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
