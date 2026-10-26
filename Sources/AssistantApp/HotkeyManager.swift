@@ -28,7 +28,7 @@ final class HotkeyManager {
             return noErr
         }
 
-        let installed = InstallEventHandler(GetApplicationEventTarget(), callback, UInt(specs.count), &specs,
+        let installed = InstallEventHandler(GetApplicationEventTarget(), callback, specs.count, &specs,
                                             Unmanaged.passUnretained(self).toOpaque(), &handlerRef)
         guard installed == noErr else { return false }
 
