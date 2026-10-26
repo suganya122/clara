@@ -11,7 +11,7 @@ public struct StopPhrase: Sendable {
     public func matches(_ transcript: String) -> Bool {
         let words = normalize(transcript)
         let wake = normalize(wakeWord)
-        return words == wake + ["stop"] || words == ["stop"] + wake
+        return words == ["stop"] || words == wake + ["stop"] || words == ["stop"] + wake
     }
 
     private func normalize(_ text: String) -> [String] {
