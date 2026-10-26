@@ -5,10 +5,12 @@ A voice-first personal assistant for macOS. Status: **Milestone 1** (menu bar ap
 ## Install and run (macOS 14+, macOS 26 recommended)
 
 ```bash
-git clone <repo-url> clara && cd clara && ./scripts/mac-setup.sh
+curl -fsSL https://raw.githubusercontent.com/suganya122/clara/main/install.sh | bash
 ```
 
-This builds, runs the tests, then starts the menu bar app. Look for the waveform icon. On first launch it asks for your Anthropic API key and stores it in the Keychain. Press **Option+Space**, type a request, press Return.
+This downloads the source, builds it, then starts the menu bar app. Re-run to update. To build with tests instead: `git clone https://github.com/suganya122/clara.git && cd clara && ./scripts/mac-setup.sh`.
+
+The app starts Look for the waveform icon. On first launch it asks for your Anthropic API key and stores it in the Keychain. Press **Option+Space**, type a request, press Return.
 
 ## Cost
 
