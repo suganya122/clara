@@ -19,8 +19,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             statusItem?.button?.toolTip = "Option+Space is taken by another app"
         }
 
-        if KeychainStore.readKey() == nil {
-            promptForAPIKey()
+        if APIKeySource.current() == nil {
+            EnvFile.openInEditor()
         }
     }
 
@@ -33,7 +33,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
         menu.addItem(withTitle: "Ask \(AppConfig.appName)  (⌥Space)", action: #selector(showPanel), keyEquivalent: "")
-        menu.addItem(withTitle: "Set API Key…", action: #selector(setAPIKey), keyEquivalent: "")
+        menu.addItem(withTitle: "Open .env File…", action: #selector(openEnv), keyEquivalent: "")
+        menu.addItem(withTitle: "Set API Key in Keychain…", action: #selector(setAPIKey), keyEquivalent: "")
         menu.addItem(withTitle: "Remove API Key", action: #selector(removeAPIKey), keyEquivalent: "")
         menu.addItem(.separator())
         menu.addItem(withTitle: "Stop Everything", action: #selector(stopEverything), keyEquivalent: "")
@@ -43,6 +44,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func showPanel() { ensurePanel().present() }
+
+    @objc private func openEnv() { EnvFile.openInEditor() }
 
     @objc private func setAPIKey() { promptForAPIKey() }
 

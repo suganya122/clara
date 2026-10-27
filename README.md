@@ -10,7 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/suganya122/clara/main/install.sh | 
 
 This downloads the source, builds it, then starts the menu bar app. Re-run to update. To build with tests instead: `git clone https://github.com/suganya122/clara.git && cd clara && ./scripts/mac-setup.sh`.
 
-Look for the waveform icon in the menu bar. On first launch it asks for your Anthropic API key and stores it in the Keychain. Press **Option+Space**, type a request, press Return.
+Look for the waveform icon in the menu bar. On first launch it creates `~/Library/Application Support/assistant-app/.env` and opens it in TextEdit: paste your Anthropic API key after `ANTHROPIC_API_KEY=` and save. (Or use the menu to store it in the Keychain instead.) Press **Option+Space**, type a request, press Return.
 
 ## Cost
 
@@ -18,7 +18,7 @@ Only the Claude API costs money. There is no telemetry, no hosted backend and no
 
 ## Security model
 
-- The API key lives in the macOS Keychain only. It is never logged or written to disk.
+- The API key lives in a private `.env` file (permissions 600, outside the repo) or the macOS Keychain. It is never logged.
 - "Clara stop" is handled before any model call.
 - Policy gate, audit log and approvals arrive in Milestone 2.
 

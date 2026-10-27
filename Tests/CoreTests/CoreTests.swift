@@ -74,3 +74,18 @@ final class AskServiceTests: XCTestCase {
         }
     }
 }
+
+final class EnvParserTests: XCTestCase {
+    func testParsesKey() {
+        XCTAssertEqual(EnvParser.apiKey(from: "ANTHROPIC_API_KEY=sk-abc"), "sk-abc")
+        XCTAssertEqual(EnvParser.apiKey(from: "# note\nexport ANTHROPIC_API_KEY = \"sk-abc\"\n"), "sk-abc")
+        XCTAssertEqual(EnvParser.apiKey(from: "OTHER=1\nANTHROPIC_API_KEY='sk-abc'  \n"), "sk-abc")
+    }
+
+    func testEmptyOrMissingIsNil() {
+        XCTAssertNil(EnvParser.apiKey(from: EnvParser.template))
+        XCTAssertNil(EnvParser.apiKey(from: ""))
+        XCTAssertNil(EnvParser.apiKey(from: "OTHER=1"))
+        XCTAssertNil(EnvParser.apiKey(from: "# ANTHROPIC_API_KEY=sk-commented"))
+    }
+}

@@ -26,7 +26,7 @@ final class AskViewModel: ObservableObject {
 
     private let service = AskService(
         model: ClaudeProvider(apiKey: {
-            guard let key = KeychainStore.readKey() else { throw ModelError.missingAPIKey }
+            guard let key = APIKeySource.current() else { throw ModelError.missingAPIKey }
             return key
         })
     )
@@ -57,7 +57,7 @@ final class AskViewModel: ObservableObject {
             } catch is CancellationError {
                 status = .idle
             } catch ModelError.missingAPIKey {
-                status = .error("No API key. Use the menu bar icon, then Set API Key.")
+                status = .error("No API key. Menu bar icon, then Open .env File, paste your key and save.")
             } catch ModelError.http(let code, let body) {
                 status = .error("Claude API error \(code): \(body.prefix(200))")
             } catch {

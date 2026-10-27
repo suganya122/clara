@@ -22,3 +22,6 @@ It needs no Accessibility permission and reports key press and release, which ho
 
 ## 7. Run via `swift run`, no app bundle yet
 Microphone and Speech permissions need an `Info.plist` with usage strings, so an app bundle script arrives with Milestone 7. Milestone 1 needs no permissions.
+
+## 8. API key from a .env file (user request), Keychain as fallback
+The brief says Keychain only. At the owner's request the app also reads `ANTHROPIC_API_KEY` from `~/Library/Application Support/assistant-app/.env`, created automatically on first launch (directory 0700, file 0600, outside any repo) and opened in TextEdit. The file is read on every request, and it takes priority over the Keychain. Tradeoff: the key sits in plain text on disk. The Keychain option remains in the menu for anyone who wants the stricter setup.
