@@ -50,6 +50,7 @@ final class AskViewModel: ObservableObject {
                     reply = "Stopped."
                 case .answered:
                     status = .idle
+                    reply = outcome.text // authoritative final text, in case streamed pieces raced
                     let u = outcome.usage
                     tokenSummary = "\(u.inputTokens) in / \(u.outputTokens) out tokens"
                 }

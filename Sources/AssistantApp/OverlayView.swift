@@ -42,14 +42,15 @@ struct OverlayView: View {
             }
 
             if !model.reply.isEmpty {
-                ScrollView {
-                    Text(model.reply)
-                        .font(.system(size: 14))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .textSelection(.enabled)
-                }
-                .frame(maxHeight: 160)
+                // No ScrollView: it collapses to zero height in an auto-sizing window.
+                // Replies are spoken-length (a few sentences), so plain wrapping text is enough.
+                Text(model.reply)
+                    .font(.system(size: 14))
+                    .foregroundColor(.white)
+                    .lineLimit(12)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .textSelection(.enabled)
             }
 
             if !model.tokenSummary.isEmpty {
